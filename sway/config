@@ -139,8 +139,12 @@ bindsym $mod+minus scratchpad show
 
 ### Function keys
 # Volume up and down
-bindsym XF86AudioRaiseVolume exec mixer vol.volume=+0.1
-bindsym XF86AudioLowerVolume exec mixer vol.volume=-0.1
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+# Volume mute toggle
+bindsym XF86AudioMute exec amixer set Master toggle
+# Mic mute toggle
+bindsym XF86AudioMicMute exec amixer set Capture toggle
 
 # Brightness up and down
 bindsym XF86MonBrightnessUp exec backlight +
