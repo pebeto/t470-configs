@@ -5,7 +5,7 @@ get_battery_info() {
 }
 internal_battery_percentage="IntBAT: $(get_battery_info 0)"
 external_battery_percentage="ExtBAT: $(get_battery_info 1)"
-battery_info="$internal_battery_percentage - $external_battery_percentage"
+battery_info="$internal_battery_percentage ~ $external_battery_percentage"
 
 get_volume_info() {
     actual_volume=$(amixer get Master | grep -o '[0-9]\+%' | head -n 1)
