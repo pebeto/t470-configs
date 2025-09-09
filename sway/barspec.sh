@@ -3,8 +3,8 @@ get_battery_info() {
     percentage=$(cat /sys/class/power_supply/BAT$1/capacity)%
 	echo $percentage
 }
-internal_battery_percentage="IntBAT: $(get_battery_info 0)"
-external_battery_percentage="ExtBAT: $(get_battery_info 1)"
+internal_battery_percentage="iBAT: $(get_battery_info 0)"
+external_battery_percentage="eBAT: $(get_battery_info 1)"
 battery_info="$internal_battery_percentage ~ $external_battery_percentage"
 
 get_volume_info() {
@@ -20,6 +20,8 @@ get_brightness_info() {
 }
 brightness_info="Brightness: $(get_brightness_info)"
 
+cpu_temps_info=$(sensors | awk '/Core/ {gsub("\\+|°C","",$3); printf "%sCore %d: %s°C", sep, n, $3; sep=" ~ "; n++} END{print ""}')
+
 datentime=$(date "+%Y-%m-%d %H:%M:%S")
 
-echo "$brightness_info | $volume_info | $battery_info | $datentime"
+echo "$cpu_temps_info | $brightness_info | $volume_info | $battery_info | $datentime"
